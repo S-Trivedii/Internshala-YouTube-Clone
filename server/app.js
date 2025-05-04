@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import connectDB from "./db/db.js";
+import authRoutes from "./routes/auth.route.js";
 
 dotenv.config();
 
@@ -13,8 +14,10 @@ app.use(bodyParser.json());
 // Parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const PORT = process.env.PORT || 8000;
+// Routes
+app.use("/api/v1/auth", authRoutes);
 
+const PORT = process.env.PORT || 8000;
 const startServer = async () => {
   try {
     await connectDB();
