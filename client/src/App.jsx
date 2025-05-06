@@ -1,12 +1,25 @@
-import Header from "./components/Header";
-import Sidebar from "./components/Siderbar";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import MainLayout from "./layout/MainLayout";
+import Home from "./pages/Home";
+
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+    ],
+  },
+]);
 
 function App() {
   return (
-    <div>
-      <Header />
-      <Sidebar />
-    </div>
+    <main>
+      <RouterProvider router={appRouter}></RouterProvider>
+    </main>
   );
 }
 

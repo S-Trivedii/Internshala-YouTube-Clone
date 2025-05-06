@@ -27,6 +27,7 @@ import {
 const sections = [
   {
     title: "Main",
+    heading: "",
     links: [
       { icon: <Home />, label: "Home" },
       { icon: <PlaySquare />, label: "Shorts" },
@@ -35,6 +36,7 @@ const sections = [
   },
   {
     title: "User",
+    heading: "You",
     links: [
       { icon: <User />, label: "User" },
       { icon: <History />, label: "History" },
@@ -42,6 +44,7 @@ const sections = [
   },
   {
     title: "Explore",
+    heading: "Explore",
     links: [
       { icon: <Flame />, label: "Trending" },
       { icon: <ShoppingBag />, label: "Shopping" },
@@ -58,6 +61,7 @@ const sections = [
   },
   {
     title: "More from YouTube",
+    heading: "More from YouTube",
     links: [
       { icon: <Star />, label: "YouTube Premium" },
       { icon: <Music2 />, label: "YouTube Music" },
@@ -66,6 +70,7 @@ const sections = [
   },
   {
     title: "Settings",
+    heading: "",
     links: [
       { icon: <Settings />, label: "Settings" },
       { icon: <Flag />, label: "Report History" },
@@ -77,10 +82,15 @@ const sections = [
 
 const Sidebar = () => {
   return (
-    <aside className="w-60 h-screen p-4 border-r border-gray-200 bg-white overflow-hidden hover:overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent">
+    <aside className="w-60 h-screen p-4  border-gray-200 bg-white overflow-hidden hover:overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent">
       {sections.map((section, index) => (
         <div key={index} className="mb-4">
           <ul>
+            {section.heading && (
+              <h3 className="text-lg font-semibold mb-1.5">
+                {section.heading}
+              </h3>
+            )}
             {section.links.map((link, i) => (
               <li
                 key={i}
