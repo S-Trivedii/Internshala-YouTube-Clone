@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { USER_API_END_POINT } from "../utils/apiEndPoint";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -15,9 +17,24 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Regiser in with:", formData);
+    // console.log("Regiser in with:", formData);
+
+    try {
+      const response = await axios.post(
+        `${USER_API_END_POINT}/api/v1/auth/register`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      console.log(response.data);
+    } catch (error) {}
   };
 
   return (
