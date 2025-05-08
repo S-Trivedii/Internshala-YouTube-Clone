@@ -1,11 +1,5 @@
-import Sidebar from "../components/Siderbar";
-
 const Home = () => {
-  return (
-    <section>
-      <Sidebar />
-    </section>
-  );
+  return <section>home page</section>;
 };
 
 export default Home;

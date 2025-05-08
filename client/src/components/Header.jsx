@@ -1,13 +1,18 @@
 import { Menu, User } from "lucide-react";
 import logo from "../assets/youtube_logo.png";
 import YouTubeSearch from "./YouTubeSearch";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const Header = () => {
+const Header = ({ isCollapsed, setIsCollapsed }) => {
   return (
     <header className="flex justify-between pt-2 mx-6">
       <div>
         <div className="flex items-center">
-          <Menu className="cursor-pointer mr-6 font-medium" />
+          <Menu
+            className="cursor-pointer mr-6 font-medium"
+            onClick={() => setIsCollapsed(!isCollapsed)}
+          />
           <span className="flex items-center justify-center cursor-pointer">
             {" "}
             <img
@@ -23,10 +28,13 @@ const Header = () => {
         <YouTubeSearch />
       </div>
       <div>
-        <button className="flex items-center cursor-pointer px-4 py-2 border border-blue-600 text-blue-600 rounded-full hover:bg-blue-50">
+        <Link
+          to="/login"
+          className="flex items-center cursor-pointer px-4 py-2 border border-blue-600 text-blue-600 rounded-full hover:bg-blue-50"
+        >
           <User className="w-5 h-5 mr-2" />
           <span className="text-sm">Sign In</span>
-        </button>
+        </Link>
       </div>
     </header>
   );

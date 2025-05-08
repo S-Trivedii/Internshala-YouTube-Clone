@@ -29,7 +29,7 @@ const sections = [
     title: "Main",
     heading: "",
     links: [
-      { icon: <Home />, label: "Home" },
+      { icon: <Home color="black" stroke="black" />, label: "Home" },
       { icon: <PlaySquare />, label: "Shorts" },
       { icon: <ListVideo />, label: "Subscriptions" },
     ],
@@ -80,7 +80,31 @@ const sections = [
   },
 ];
 
-const Sidebar = () => {
+// Sidebar
+const Sidebar = ({ isCollapsed }) => {
+  const collapsedLinks = [
+    { icon: <Home color="black" stroke="black" />, label: "Home" },
+    { icon: <PlaySquare />, label: "Shorts" },
+    { icon: <ListVideo />, label: "Subscriptions" },
+    { icon: <User />, label: "You" },
+  ];
+
+  if (isCollapsed) {
+    return (
+      <aside className="w-20 h-screen p-3 bg-white border-gray-200 flex flex-col items-center gap-6">
+        {collapsedLinks.map((link, i) => (
+          <div
+            key={i}
+            className="flex flex-col items-center text-xs cursor-pointer hover:bg-gray-100 rounded-lg p-2 w-full"
+          >
+            <div className="w-6 h-6 mb-1">{link.icon}</div>
+            <span className="text-[10px]">{link.label}</span>
+          </div>
+        ))}
+      </aside>
+    );
+  }
+
   return (
     <aside className="w-60 h-screen p-4  border-gray-200 bg-white overflow-hidden hover:overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent">
       {sections.map((section, index) => (
