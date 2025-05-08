@@ -38,7 +38,9 @@ export const register = async (req, res) => {
       message: "Account created successfully.",
       success: true,
     });
-  } catch (error) {}
+  } catch (error) {
+    return res.status(500).json({ message: error.message, success: false });
+  }
 };
 
 // Login controller
@@ -83,6 +85,6 @@ export const login = async (req, res) => {
       success: true,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message, success: false });
+    return res.status(500).json({ message: error.message, success: false });
   }
 };
