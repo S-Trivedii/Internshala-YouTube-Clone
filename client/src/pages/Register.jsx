@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { USER_API_END_POINT } from "../utils/apiEndPoint";
 
@@ -9,6 +9,8 @@ const Register = () => {
     email: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -22,8 +24,9 @@ const Register = () => {
     // console.log("Regiser in with:", formData);
 
     try {
+      // Sending data to server
       const response = await axios.post(
-        `${USER_API_END_POINT}/api/v1/auth/register`,
+        `${USER_API_END_POINT}/register`,
         formData,
         {
           headers: {
@@ -34,7 +37,16 @@ const Register = () => {
       );
 
       console.log(response.data);
-    } catch (error) {}
+
+      if (response.data.success) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error(
+        "Registration error:",
+        error.response?.data || error.message
+      );
+    }
   };
 
   return (

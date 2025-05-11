@@ -4,12 +4,16 @@ import YouTubeSearch from "./YouTubeSearch";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Dropdown from "./Dropdown";
+import { useUser } from "../utils/context/UserContext";
 
 const Header = ({ isCollapsed, setIsCollapsed }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const signIn = false;
-  const user = { name: "Shubhanshu" };
+  // const signIn = false;
+  // const user = { name: "Shubhanshu" };
+
+  const { user } = useUser();
+  const signIn = !!user;
 
   return (
     <header className="flex justify-between pt-2 mx-6 relative">
@@ -42,14 +46,14 @@ const Header = ({ isCollapsed, setIsCollapsed }) => {
           <>
             <div
               className="w-9 h-9 rounded-full cursor-pointer bg-blue-600 text-white flex items-center justify-center font-semibold text-sm"
-              title={user.name}
+              title={user.username}
               onClick={() => setShowDropdown(!showDropdown)}
             >
-              {user.name.charAt(0).toUpperCase()}
+              {user.username.charAt(0).toUpperCase()}
             </div>
             {showDropdown && (
               <div className="absolute right-0 mt-2">
-                <Dropdown channelName={user.name} />
+                <Dropdown channelName={`@${user.username}`} />
               </div>
             )}
           </>

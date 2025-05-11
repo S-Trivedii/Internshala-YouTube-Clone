@@ -34,6 +34,7 @@ export const register = async (req, res) => {
       password: hashPassword,
     });
 
+    console.log("Register: ");
     return res.status(201).json({
       message: "Account created successfully.",
       success: true,
@@ -74,13 +75,14 @@ export const login = async (req, res) => {
     };
 
     // Sign jwt token (token creation)
-    const token = await jwt.sign(tokenData, process.env.JWT_SECRET, {
+    const token = jwt.sign(tokenData, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
 
     // Sending to token to client
     return res.status(200).json({
       message: `Welcome back, ${user.username}`,
+      user,
       token,
       success: true,
     });

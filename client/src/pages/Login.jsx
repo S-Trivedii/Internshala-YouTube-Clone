@@ -1,17 +1,46 @@
+import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { USER_API_END_POINT } from "../utils/apiEndPoint";
+import { useUser } from "../utils/context/UserContext";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
+
+  const navigate = useNavigate();
+
+  // hook
+  const { setUser } = useUser();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Replace with real login logic
     console.log("Logging in with:", formData);
+
+    try {
+      const response = await axios.post(
+        `${USER_API_END_POINT}/login`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      // console.log(response.data);
+
+      if (response.data.success) {
+        setUser(response.data.user);
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Login error:", error.response?.data || error.message);
+    }
   };
 
   return (

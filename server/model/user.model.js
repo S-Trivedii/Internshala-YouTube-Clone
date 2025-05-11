@@ -9,10 +9,6 @@ const userSchema = new mongoose.Schema(
       trim: true,
       minlength: [3, "Username must be at least 3 characters long"],
       maxlength: [20, "Username must not exceed 20 characters"],
-      match: [
-        /^[a-zA-Z0-9_]+$/,
-        "Username can only contain letters, numbers, and underscores",
-      ],
     },
     email: {
       type: String,
@@ -41,3 +37,8 @@ export const User = mongoose.model("User", userSchema);
 //     message:
 //       "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
 //   },
+
+// match: [
+//         /^[a-zA-Z0-9_]+$/,
+//         "Username can only contain letters, numbers, and underscores",
+//       ],
