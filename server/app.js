@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import connectDB from "./db/db.js";
 import authRoutes from "./routes/auth.route.js";
@@ -14,6 +15,9 @@ app.use(bodyParser.json());
 
 // Parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Cookie-parser
+app.use(cookieParser());
 
 // Cors
 const corsOptions = {
