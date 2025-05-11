@@ -97,3 +97,25 @@ export const login = async (req, res) => {
     return res.status(500).json({ message: error.message, success: false });
   }
 };
+
+// Logout controller
+export const logout = (req, res) => {
+  try {
+    // Clear the JWT token cookie
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Ensure it works in production
+      sameSite: "None",
+    });
+
+    return res.status(200).json({
+      message: "Logged out successfully",
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+      success: false,
+    });
+  }
+};
