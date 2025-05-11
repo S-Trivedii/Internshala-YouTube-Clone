@@ -57,7 +57,8 @@ export const login = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email });
+    // will only select username and password
+    const user = await User.findOne({ email }).select("username password");
 
     // If user doesn't exist
     if (!user) return res.status(401).json({ message: "Incorrect email" });
