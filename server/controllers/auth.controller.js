@@ -14,7 +14,7 @@ export const register = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("-password");
 
     // If user already exist
     if (user) {
@@ -34,7 +34,7 @@ export const register = async (req, res) => {
       password: hashPassword,
     });
 
-    console.log("Register: ");
+    // console.log("Register: ");
     return res.status(201).json({
       message: "Account created successfully.",
       success: true,
@@ -57,8 +57,8 @@ export const login = async (req, res) => {
       });
     }
 
-    // will only select username and password
-    const user = await User.findOne({ email }).select("username password");
+    // will only select username, password and _id
+    const user = await User.findOne({ email }).select("username password _id");
 
     // If user doesn't exist
     if (!user) return res.status(401).json({ message: "Incorrect email" });
@@ -80,13 +80,19 @@ export const login = async (req, res) => {
       expiresIn: "1d",
     });
 
-    // Sending to token to client
-    return res.status(200).json({
-      message: `Welcome back, ${user.username}`,
-      user,
-      token,
-      success: true,
-    });
+    return res
+      .cookie("token", token, {
+        httpOnly: true, // prevent JS access
+        secure: process.env.NODE_ENV === "production", // set false during dev
+        sameSite: "None", // necessary for cross-origin request
+        maxAge: 24 * 60 * 60 * 1000, // 1 day
+      })
+      .status(200)
+      .json({
+        message: `Welcome back, ${user.username}`,
+        user: { username: user.username },
+        success: true,
+      });
   } catch (error) {
     return res.status(500).json({ message: error.message, success: false });
   }
