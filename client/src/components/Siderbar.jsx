@@ -91,7 +91,7 @@ const Sidebar = ({ isCollapsed }) => {
 
   if (isCollapsed) {
     return (
-      <aside className="w-20 h-screen p-3 bg-white border-gray-200 flex flex-col items-center gap-6">
+      <aside className="w-20 flex-shrink-0 p-3 bg-white border-gray-200 flex flex-col items-center gap-6">
         {collapsedLinks.map((link, i) => (
           <div
             key={i}

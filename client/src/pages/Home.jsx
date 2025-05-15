@@ -1,9 +1,11 @@
 import FilterBar from "../components/FilterBar";
+import VideoGrid from "../components/VideoGrid";
 
 const Home = () => {
   return (
-    <section>
+    <section className="flex flex-col">
       <FilterBar />
+      <VideoGrid />
     </section>
   );
 };

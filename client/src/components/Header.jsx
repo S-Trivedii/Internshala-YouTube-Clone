@@ -43,7 +43,7 @@ const Header = ({ isCollapsed, setIsCollapsed }) => {
       {/* Right section */}
       <div className="relative">
         {signIn ? (
-          <>
+          <div className="relative flex items-center justify-center w-10 h-10">
             <div
               className="w-9 h-9 rounded-full cursor-pointer bg-blue-600 text-white flex items-center justify-center font-semibold text-sm"
               title={user.username}
@@ -52,11 +52,11 @@ const Header = ({ isCollapsed, setIsCollapsed }) => {
               {user.username.charAt(0).toUpperCase()}
             </div>
             {showDropdown && (
-              <div className="absolute right-0 mt-2">
+              <div className="absolute top-full z-50 right-0 mt-2">
                 <Dropdown channelName={`@${user.username}`} setUser={setUser} />
               </div>
             )}
-          </>
+          </div>
         ) : (
           <Link
             to="/login"
