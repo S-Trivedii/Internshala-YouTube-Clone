@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
+// First create a context with or without object.
 const UserContext = createContext();
 
 // UserProvider component

@@ -1,6 +1,22 @@
-const Dropdown = ({ channelName = "Channel" }) => {
-  const handleLogout = () => {
-    console.log("Logged out");
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { USER_API_END_POINT } from "../utils/apiEndPoint";
+
+const Dropdown = ({ channelName = "@xyz_youtube", setUser }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.get(`${USER_API_END_POINT}/logout`, {
+        withCredentials: true,
+      });
+
+      console.log("Logged out", response.data);
+      setUser(null);
+      navigate("/");
+    } catch (error) {
+      console.log("Logged out failed, ", error.message);
+    }
   };
 
   return (
@@ -12,6 +28,7 @@ const Dropdown = ({ channelName = "Channel" }) => {
       >
         View Your Channel
       </button>
+
       <button
         className="block w-full cursor-pointer text-left px-4 py-2 text-red-600 hover:bg-gray-100"
         onClick={handleLogout}

@@ -12,7 +12,7 @@ const Header = ({ isCollapsed, setIsCollapsed }) => {
   // const signIn = false;
   // const user = { name: "Shubhanshu" };
 
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const signIn = !!user;
 
   return (
@@ -53,7 +53,7 @@ const Header = ({ isCollapsed, setIsCollapsed }) => {
             </div>
             {showDropdown && (
               <div className="absolute right-0 mt-2">
-                <Dropdown channelName={`@${user.username}`} />
+                <Dropdown channelName={`@${user.username}`} setUser={setUser} />
               </div>
             )}
           </>
