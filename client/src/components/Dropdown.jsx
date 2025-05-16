@@ -2,7 +2,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { USER_API_END_POINT } from "../utils/apiEndPoint";
 
-const Dropdown = ({ channelName = "@xyz_youtube", setUser }) => {
+const Dropdown = ({ channelName = "@xyz_youtube", setUser, setIsLoggedIn }) => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -11,8 +11,9 @@ const Dropdown = ({ channelName = "@xyz_youtube", setUser }) => {
         withCredentials: true,
       });
 
-      console.log("Logged out", response.data);
+      // console.log("Logged out", response.data);
       setUser(null);
+      setIsLoggedIn(false);
       navigate("/");
     } catch (error) {
       console.log("Logged out failed, ", error.message);

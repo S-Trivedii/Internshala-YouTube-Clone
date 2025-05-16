@@ -1,3 +1,7 @@
+import gaming from "../assets/gaming.jpg";
+import nature from "../assets/nature.jpg";
+import python from "../assets/python.jpg";
+
 const sampleVideos = Array.from({ length: 16 }).map((_, i) => ({
   id: i,
   title: `Sample Video Title ${i + 1}`,
@@ -13,7 +17,7 @@ const VideoGrid = () => {
         {sampleVideos.map((video) => (
           <div key={video.id} className="rounded-lg overflow-hidden shadow-sm">
             <img
-              src={video.thumbnail}
+              src={nature}
               alt={video.title}
               className="w-full h-48 object-cover rounded-md"
             />

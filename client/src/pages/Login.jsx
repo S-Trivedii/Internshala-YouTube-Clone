@@ -10,7 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   // hook
-  const { setUser } = useUser();
+  const { setUser, setIsLoggedIn } = useUser();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,6 +36,7 @@ const Login = () => {
 
       if (response.data.success) {
         setUser(response.data.user);
+        setIsLoggedIn(true);
         navigate("/");
       }
     } catch (error) {

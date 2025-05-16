@@ -1,11 +1,22 @@
 import FilterBar from "../components/FilterBar";
+import LoggedOutHome from "../components/LoggedOutHome";
 import VideoGrid from "../components/VideoGrid";
+import { useUser } from "../utils/context/UserContext";
 
 const Home = () => {
+  const { isLoggedIn } = useUser();
   return (
     <section className="flex flex-col">
-      <FilterBar />
-      <VideoGrid />
+      {isLoggedIn ? (
+        <>
+          <FilterBar />
+          <VideoGrid />
+        </>
+      ) : (
+        <>
+          <LoggedOutHome />
+        </>
+      )}
     </section>
   );
 };
