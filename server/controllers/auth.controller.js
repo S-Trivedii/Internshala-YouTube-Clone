@@ -84,7 +84,7 @@ export const login = async (req, res) => {
       .cookie("token", token, {
         httpOnly: true, // prevent JS access
         secure: process.env.NODE_ENV === "production", // set false during dev
-        sameSite: "None", // necessary for cross-origin request
+        sameSite: "Lax", // necessary for cross-origin request
         maxAge: 24 * 60 * 60 * 1000, // 1 day
       })
       .status(200)
@@ -101,16 +101,50 @@ export const login = async (req, res) => {
 // Logout controller
 export const logout = (req, res) => {
   try {
-    // Clear the JWT token cookie
+    // Clear the JWT token cookie, all the field httpOnly, secure, sameSite must match with login controller for clearing the cookies
     res.clearCookie("token", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Ensure it works in production
-      sameSite: "None",
+      sameSite: "Lax",
     });
 
     return res.status(200).json({
       message: "Logged out successfully",
       success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+      success: false,
+    });
+  }
+};
+
+// Me route
+export const me = async (req, res) => {
+  const userId = req.userId; // ✅ no destructuring
+
+  if (!userId) {
+    return res.status(404).json({
+      message: "User ID does not exist",
+      success: false,
+    });
+  }
+
+  try {
+    const user = await User.findById(userId).select("username _id");
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+        success: false,
+      });
+    }
+
+    return res.status(200).json({
+      message: `Welcome back, ${user.username}`,
+      success: true,
+      user,
     });
   } catch (error) {
     return res.status(500).json({
