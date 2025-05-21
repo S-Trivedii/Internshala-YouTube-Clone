@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { User } from "../model/user.model.js";
+import { Channel } from "../model/channel.model.js";
 
 // Register controller
 export const register = async (req, res) => {
@@ -14,7 +15,8 @@ export const register = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ email }).select("-password");
+    // select method not necessary since it is not sending to client
+    const user = await User.findOne({ email });
 
     // If user already exist
     if (user) {
@@ -28,11 +30,25 @@ export const register = async (req, res) => {
     const hashPassword = await bcrypt.hash(password, 10);
 
     // Creating and saving document
-    await User.create({
+    const savedUser = await User.create({
       username,
       email,
       password: hashPassword,
     });
+
+    // Creating a channel automatically for every registered user
+    const channel = new Channel({
+      channelName: `${username}`,
+      owner: savedUser._id,
+      description: "Welcome to my channel",
+      bannerImage: "",
+    });
+
+    await channel.save();
+
+    // Add channel to savedUser list, establising a relation b/w user and channel
+    savedUser.channels.push(channel._id);
+    await savedUser.save();
 
     // console.log("Register: ");
     return res.status(201).json({
