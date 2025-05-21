@@ -24,6 +24,14 @@ const userSchema = new mongoose.Schema(
       minlength: [8, "Password must be at least 8 characters long"],
       maxlength: [100, "Password is too long"],
     },
+    avatar: {
+      type: String,
+      default: null,
+    },
+    channels: {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Channel" }],
+      default: [],
+    },
   },
   { timestamps: true }
 ); // Adds createdAt and updatedAt fields
