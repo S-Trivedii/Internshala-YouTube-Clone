@@ -16,6 +16,10 @@ const appRouter = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
+      {
+        path: "/channel/:channelId",
+        element: <Channel />,
+      },
     ],
   },
   {
@@ -25,10 +29,6 @@ const appRouter = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
-  },
-  {
-    path: "/channel/:channelId",
-    element: <Channel />,
   },
 ]);
 
