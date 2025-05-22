@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import connectDB from "./db/db.js";
 import authRoutes from "./routes/auth.route.js";
+import channelRoutes from "./routes/channel.route.js";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use(cors(corsOptions));
 
 // Routes
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/channel", channelRoutes);
 
 const PORT = process.env.PORT || 8000;
 const startServer = async () => {
