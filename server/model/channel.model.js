@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const channelSchema = new mongoose.Schema(
   {
-    name: {
+    channelName: {
       type: String,
       required: true,
       unique: true,
@@ -16,11 +16,6 @@ const channelSchema = new mongoose.Schema(
     description: {
       type: String,
       default: "",
-    },
-    profileImage: {
-      // Channel logo (separate from user avatar)
-      type: String,
-      default: null,
     },
     bannerImage: {
       // Channel header banner
