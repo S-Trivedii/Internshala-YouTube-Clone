@@ -54,6 +54,7 @@ export const register = async (req, res) => {
     return res.status(201).json({
       message: "Account created successfully.",
       success: true,
+      channelId: channel._id,
     });
   } catch (error) {
     return res.status(500).json({ message: error.message, success: false });
@@ -73,8 +74,10 @@ export const login = async (req, res) => {
       });
     }
 
-    // will only select username, password and _id
-    const user = await User.findOne({ email }).select("username password _id");
+    // will only select username, password and _id channelId
+    const user = await User.findOne({ email }).select(
+      "username password _id channels"
+    );
 
     // If user doesn't exist
     if (!user) return res.status(401).json({ message: "Incorrect email" });
@@ -108,6 +111,7 @@ export const login = async (req, res) => {
         message: `Welcome back, ${user.username}`,
         user: { username: user.username },
         success: true,
+        channelId: user.channels[0]?._id, // if 1 channel per user
       });
   } catch (error) {
     return res.status(500).json({ message: error.message, success: false });

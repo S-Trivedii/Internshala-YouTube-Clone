@@ -12,7 +12,7 @@ const Header = ({ isCollapsed, setIsCollapsed }) => {
   // const signIn = false;
   // const user = { name: "Shubhanshu" };
 
-  const { user, setUser, setIsLoggedIn } = useUser();
+  const { user, setUser, setIsLoggedIn, userChannelId } = useUser();
   const signIn = !!user;
 
   return (
@@ -57,6 +57,7 @@ const Header = ({ isCollapsed, setIsCollapsed }) => {
                   channelName={`@${user.username}`}
                   setUser={setUser}
                   setIsLoggedIn={setIsLoggedIn}
+                  userChannelId={userChannelId}
                 />
               </div>
             )}

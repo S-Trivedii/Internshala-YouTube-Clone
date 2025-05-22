@@ -10,7 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   // hook
-  const { setUser, setIsLoggedIn } = useUser();
+  const { setUser, setIsLoggedIn, setUserChannelId } = useUser();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,7 +18,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Logging in with:", formData);
+    // console.log("Logging in with:", formData);
 
     try {
       const response = await axios.post(
@@ -32,11 +32,13 @@ const Login = () => {
         }
       );
 
-      // console.log(response.data);
+      // {message: 'Welcome back, raj', user: {username: 'raj'}, success: true, channelId: '682f005bd02635f1660dc2f8'}
+      // console.log("Data ", response.data);
 
       if (response.data.success) {
         setUser(response.data.user);
         setIsLoggedIn(true);
+        setUserChannelId(response.data.channelId);
         navigate("/");
       }
     } catch (error) {

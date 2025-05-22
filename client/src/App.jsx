@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { useUser } from "./utils/context/UserContext";
 import { useEffect } from "react";
+import Channel from "./pages/Channel";
 
 const appRouter = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/channel/:channelId",
+    element: <Channel />,
   },
 ]);
 

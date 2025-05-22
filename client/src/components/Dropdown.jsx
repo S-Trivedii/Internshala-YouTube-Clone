@@ -1,8 +1,13 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { USER_API_END_POINT } from "../utils/apiEndPoint";
 
-const Dropdown = ({ channelName = "@xyz_youtube", setUser, setIsLoggedIn }) => {
+const Dropdown = ({
+  channelName = "@xyz_youtube",
+  setUser,
+  setIsLoggedIn,
+  userChannelId,
+}) => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -23,12 +28,12 @@ const Dropdown = ({ channelName = "@xyz_youtube", setUser, setIsLoggedIn }) => {
   return (
     <div className=" w-56 bg-gray-100 rounded-md shadow-lg border text-sm z-50">
       <div className="px-4 py-3 font-semibold border-b">{channelName}</div>
-      <button
+      <Link
         className="block w-full cursor-pointer text-left px-4 py-2 hover:bg-gray-100 hover:text-blue-500"
-        onClick={() => console.log("View your channel")}
+        to={`/channel/${userChannelId}`}
       >
         View Your Channel
-      </button>
+      </Link>
 
       <button
         className="block w-full cursor-pointer text-left px-4 py-2 text-red-500 hover:text-red-800 hover:font-bold "
