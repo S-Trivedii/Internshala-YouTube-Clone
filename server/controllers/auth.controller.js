@@ -152,7 +152,7 @@ export const me = async (req, res) => {
   }
 
   try {
-    const user = await User.findById(userId).select("username _id");
+    const user = await User.findById(userId).select("username _id channels");
 
     if (!user) {
       return res.status(404).json({
