@@ -14,6 +14,9 @@ const app = express();
 // Parse application/json
 app.use(bodyParser.json());
 
+// serving static file
+app.use("/public", express.static("public"));
+
 // Parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 

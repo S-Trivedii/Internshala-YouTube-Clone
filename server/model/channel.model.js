@@ -22,6 +22,10 @@ const channelSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    channelLogo: {
+      type: String,
+      default: "http://localhost:3000/public/default_channel_logo.png",
+    },
   },
   { timestamps: true }
 );
