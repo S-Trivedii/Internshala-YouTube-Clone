@@ -24,14 +24,16 @@ const Header = ({ isCollapsed, setIsCollapsed }) => {
             className="cursor-pointer mr-6 font-medium"
             onClick={() => setIsCollapsed(!isCollapsed)}
           />
-          <span className="flex items-center justify-center cursor-pointer">
-            <img
-              src={logo}
-              alt="YouTube logo"
-              className="w-[30px] h-[30px] mr-1"
-            />
-            <span className="font-bold text-xl">YouTube</span>
-          </span>
+          <Link to="/">
+            <span className="flex items-center justify-center cursor-pointer">
+              <img
+                src={logo}
+                alt="YouTube logo"
+                className="w-[30px] h-[30px] mr-1"
+              />
+              <span className="font-bold text-xl">YouTube</span>
+            </span>
+          </Link>
         </div>
       </div>
 
