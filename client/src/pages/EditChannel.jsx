@@ -34,8 +34,6 @@ const EditChannel = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("first");
-
     // Validation before proceeding
     if (!input.name.trim() || !input.description.trim()) {
       alert("Channel name and description are required.");
@@ -49,16 +47,13 @@ const EditChannel = () => {
       formData.append("name", input.name);
       formData.append("description", input.description);
 
-      console.log("second");
-
       if (input.bannerImage) {
         formData.append("bannerImage", input.bannerImage);
       }
-      console.log("third");
+
       if (input.channelLogo) {
         formData.append("channelLogo", input.channelLogo);
       }
-      console.log("forth");
 
       // Sending formData to backend
       const response = await axios.put(
@@ -72,8 +67,6 @@ const EditChannel = () => {
         }
       );
 
-      console.log("fifth");
-
       // if successfull navigate back to channelId
       if (response.data.success) {
         navigate("/");
@@ -84,7 +77,7 @@ const EditChannel = () => {
       //   console.log(pair[0], pair[1]);
       // }
     } catch (error) {
-      console.error("Upload failed:", error.message);
+      // console.error("Upload failed:", error.message);
       alert("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
@@ -173,7 +166,7 @@ const EditChannel = () => {
         <button
           type="submit"
           disabled={loading}
-          className={`bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition ${
+          className={`bg-blue-600 text-white px-5 py-2 rounded-md cursor-pointer hover:bg-blue-700 transition ${
             loading ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >

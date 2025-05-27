@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CHANNEL_API_END_POINT } from "../utils/apiEndPoint";
-import bannerImage from "../assets/banner_img.jpg";
+// import bannerImage from "../assets/banner_img.jpg";
 
 const Channel = () => {
   const [channelData, setChannelData] = useState(null);
@@ -17,7 +17,7 @@ const Channel = () => {
             withCredentials: true,
           }
         );
-        console.log("Channel data- ", response.data);
+        // console.log("Channel data-- ", response.data);
         setChannelData(response.data);
       } catch (error) {
         console.error("Failed to fetch channel:", error.message);
@@ -59,7 +59,9 @@ const Channel = () => {
         {/* Channel Info */}
         <div className="flex-1">
           <h1 className="text-3xl font-bold">{channel.channelName}</h1>
-          <p className="text-gray-600 mt-1">{channel.description}</p>
+          <p className="text-gray-600 mt-1 whitespace-pre-line">
+            {channel.description}
+          </p>
 
           <div className="flex justify-between items-center mt-4">
             {/* Subscribe Button */}

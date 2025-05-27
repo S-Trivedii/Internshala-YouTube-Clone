@@ -27,10 +27,8 @@ export const getChannelById = async (req, res) => {
 
 // Update channel by id
 export const updateChannelById = async (req, res) => {
-  console.log("Req body ", req.body);
-  console.log("Req params ", req.params);
   console.log("req files ", req.files);
-  console.log("Req  ", req);
+
   try {
     const { channelId } = req.params;
     const { name, description } = req.body;
@@ -41,7 +39,7 @@ export const updateChannelById = async (req, res) => {
 
     // Prepare update data
     const updateData = {
-      name,
+      channelName: name,
       description,
     };
 
@@ -52,7 +50,7 @@ export const updateChannelById = async (req, res) => {
     const updatedChannel = await Channel.findByIdAndUpdate(
       channelId,
       updateData,
-      { new: true }
+      { new: true } //  <- important to return the updated doc
     );
 
     return res.status(200).json({
