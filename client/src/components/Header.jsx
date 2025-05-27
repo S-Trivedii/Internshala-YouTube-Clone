@@ -43,7 +43,16 @@ const Header = ({ isCollapsed, setIsCollapsed }) => {
       </div>
 
       {/* Right section */}
-      <div className="relative">
+      <div className="relative flex items-center gap-4">
+        {signIn && (
+          <Link
+            to="/videos/upload"
+            className="flex items-center justify-center cursor-pointer px-4 py-1 border border-gray-700 bg-gray-200 rounded-full hover:bg-gray-100 transition"
+          >
+            <span className="text-xl mr-1 font-bold">+</span>
+            <span className="text-sm font-bold">Create</span>
+          </Link>
+        )}
         {signIn ? (
           <div className="relative flex items-center justify-center w-10 h-10">
             <div
