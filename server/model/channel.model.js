@@ -26,6 +26,10 @@ const channelSchema = new mongoose.Schema(
       type: String,
       default: "http://localhost:3000/public/default_channel_logo.png",
     },
+    videos: {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Video" }],
+      default: [],
+    },
   },
   { timestamps: true }
 );

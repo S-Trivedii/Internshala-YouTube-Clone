@@ -37,16 +37,3 @@ const userSchema = new mongoose.Schema(
 ); // Adds createdAt and updatedAt fields
 
 export const User = mongoose.model("User", userSchema);
-
-// validate: {
-//     validator: function (v) {
-//       return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(v);
-//     },
-//     message:
-//       "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
-//   },
-
-// match: [
-//         /^[a-zA-Z0-9_]+$/,
-//         "Username can only contain letters, numbers, and underscores",
-//       ],
