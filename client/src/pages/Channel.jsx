@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { CHANNEL_API_END_POINT } from "../utils/apiEndPoint";
+import UserVideos from "../components/UserVideos";
 // import bannerImage from "../assets/banner_img.jpg";
 
 const Channel = () => {
@@ -17,7 +18,7 @@ const Channel = () => {
             withCredentials: true,
           }
         );
-        // console.log("Channel data-- ", response.data);
+        console.log("Channel data-- ", response.data);
         setChannelData(response.data);
       } catch (error) {
         console.error("Failed to fetch channel:", error.message);
@@ -28,7 +29,7 @@ const Channel = () => {
   }, [channelId]);
 
   if (!channelData) {
-    console.log("For view ", channelData);
+    // console.log("For view ", channelData);
     return <p className="text-center text-lg mt-10">Loading channel...</p>;
   }
 
@@ -70,6 +71,7 @@ const Channel = () => {
             </button>
 
             {/* Customize Button — only visible to owner */}
+            {/* check if channel.owner === signin.ownerid*/}
             {channel.owner && (
               <Link
                 to={`/channel/${channelId}/edit`}
@@ -86,6 +88,9 @@ const Channel = () => {
           </div>
         </div>
       </div>
+
+      {/* Uservideo component */}
+      <UserVideos channelData={channelData} />
     </div>
   );
 };

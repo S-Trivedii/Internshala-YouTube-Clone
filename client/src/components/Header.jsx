@@ -46,7 +46,7 @@ const Header = ({ isCollapsed, setIsCollapsed }) => {
       <div className="relative flex items-center gap-4">
         {signIn && (
           <Link
-            to="/videos/upload"
+            to={`/videos/upload/${userChannelId}`}
             className="flex items-center justify-center cursor-pointer px-4 py-1 border border-gray-700 bg-gray-200 rounded-full hover:bg-gray-100 transition"
           >
             <span className="text-xl mr-1 font-bold">+</span>
