@@ -8,7 +8,11 @@ export const getChannelById = async (req, res) => {
     // Extracting channelId from request parameters
     const { channelId } = req.params;
 
-    const channel = await Channel.findById(channelId);
+    // Why populate here ?
+    // Client side I need data of each video(like videoTitle, videoDescription etc). Since channel contains 'ids' of all videos associated with that channel.
+    // I can use populate method to get all data of videos.
+
+    const channel = await Channel.findById(channelId).populate("videos").exec();
 
     if (!channel) {
       return res.status(404).json({
