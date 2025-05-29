@@ -26,6 +26,20 @@ const videoSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    likes: {
+      type: Number,
+      default: 0,
+    },
+    dislikes: {
+      type: Number,
+      default: 0,
+    },
+    reactions: [
+      {
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        type: { type: String, enum: ["like", "dislike"] },
+      },
+    ],
     uploadDate: {
       type: Date,
       default: Date.now,
