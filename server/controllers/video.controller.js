@@ -1,6 +1,7 @@
 import { Channel } from "../model/channel.model.js";
 import { Video } from "../model/video.model.js";
 
+// Create video or post video
 export const createVideo = async (req, res) => {
   try {
     const { videoTitle, videoDescription, videoUrl, channelId } = req.body;
@@ -52,5 +53,54 @@ export const createVideo = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: error.message, message: "Server error" });
+  }
+};
+
+// Like or Dislike
+export const reactVideo = async (req, res) => {
+  try {
+    const { videoId } = req.params;
+    const { userId, reactionType } = req.body; // 'like' or 'dislike'
+
+    const video = await Video.findById(videoId);
+    if (!video) return res.status(404).json({ message: "Video not found" });
+
+    const existingReaction = video.reactions.find(
+      (r) => r.userId.toString() === userId
+    );
+
+    if (existingReaction) {
+      if (existingReaction.type === reactionType) {
+        return res
+          .status(400)
+          .json({ message: `Already ${reactionType}d`, success: false });
+      }
+
+      // Switch from like <-> dislike
+      if (existingReaction.type === "like") {
+        video.likes -= 1;
+        video.dislikes += 1;
+      } else {
+        video.likes += 1;
+        video.dislikes -= 1;
+      }
+
+      existingReaction.type = reactionType;
+    } else {
+      // New reaction
+      video.reactions.push({ userId, type: reactionType });
+      if (reactionType === "like") video.likes += 1;
+      else video.dislikes += 1;
+    }
+
+    await video.save();
+    return res.status(200).json({
+      message: "Send successfully",
+      likes: video.likes,
+      dislikes: video.dislikes,
+      success: true,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
