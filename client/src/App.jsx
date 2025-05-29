@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import Channel from "./pages/Channel";
 import EditChannel from "./pages/EditChannel";
 import UploadVideo from "./pages/UploadVideo";
+import Video from "./pages/Video";
 
 const appRouter = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/videos/upload/:channelId",
     element: <UploadVideo />,
+  },
+  {
+    path: "/videos/:videoId",
+    element: <Video />,
   },
 ]);
 
