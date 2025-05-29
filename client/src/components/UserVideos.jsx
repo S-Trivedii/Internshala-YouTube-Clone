@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 const UserVideos = ({ channelData }) => {
   console.log("chhhanels data ", channelData);
   const videos = channelData?.channel?.videos || [];
-  console.log("videosss. ", videos);
+  // console.log("videosss. ", videos);
 
   return (
     <div className="mt-10">
@@ -15,27 +17,24 @@ const UserVideos = ({ channelData }) => {
       {videos.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {videos.map((video) => (
-            <div
-              key={video._id}
-              className="border rounded-lg overflow-hidden shadow hover:shadow-md transition"
-            >
-              {/* Thumbnail */}
-              <img
-                src={
-                  video.videoThumbnail || "https://via.placeholder.com/300x200"
-                }
-                alt={video.videoTitle}
-                className="w-full h-48 object-cover"
-              />
+            <Link to={`/videos/${video._id}`} state={channelData}>
+              <div
+                key={video._id}
+                className="cursor-pointer rounded-lg overflow-hidden shadow hover:shadow-md transition"
+              >
+                {/* Thumbnail */}
+                <img
+                  src={video.videoThumbnail}
+                  alt={video.videoTitle}
+                  className="w-full h-48 object-cover"
+                />
 
-              {/* Video Info */}
-              <div className="p-4">
-                <h3 className="text-lg font-bold mb-1">{video.videoTitle}</h3>
-                <p className="text-gray-600 text-sm">
-                  {video.videoDescription?.slice(0, 100)}...
-                </p>
+                {/* Video Info */}
+                <div className="p-4">
+                  <h3 className="text-lg font-bold mb-1">{video.videoTitle}</h3>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       ) : (
