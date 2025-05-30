@@ -5,6 +5,7 @@ import { useUser } from "../utils/context/UserContext";
 import { VIDEO_API_END_POINT } from "../utils/apiEndPoint";
 import { useEffect } from "react";
 import axios from "axios";
+import Comment from "../components/Comment";
 
 const Video = () => {
   const location = useLocation();
@@ -141,7 +142,7 @@ const Video = () => {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={handleLike}
-                      className={`flex items-center gap-1 px-3 py-1 rounded-full ${
+                      className={`flex items-center gap-1 px-3 py-1 rounded-full cursor-pointer ${
                         userReaction === "like"
                           ? "bg-blue-500 text-white"
                           : "bg-gray-200 hover:bg-gray-300"
@@ -152,7 +153,7 @@ const Video = () => {
 
                     <button
                       onClick={handleDislike}
-                      className={`px-3 py-1 rounded-full ${
+                      className={`px-3 py-1 rounded-full cursor-pointer ${
                         userReaction === "dislike"
                           ? "bg-blue-500 text-white"
                           : "bg-gray-200 hover:bg-gray-300"
@@ -165,6 +166,7 @@ const Video = () => {
               </div>
 
               <p className="text-gray-700">{video.videoDescription}</p>
+              <Comment />
             </>
           ) : (
             <p className="text-red-500 font-semibold">

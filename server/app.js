@@ -7,6 +7,7 @@ import connectDB from "./db/db.js";
 import authRoutes from "./routes/auth.route.js";
 import channelRoutes from "./routes/channel.route.js";
 import videoRoutes from "./routes/video.route.js";
+import commentRoutes from "./routes/comment.route.js";
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.use(cors(corsOptions));
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/channel", channelRoutes);
 app.use("/api/v1/video", videoRoutes);
+app.use("/api/v1/comment", commentRoutes);
 
 const PORT = process.env.PORT || 8000;
 const startServer = async () => {
