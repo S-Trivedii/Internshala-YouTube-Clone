@@ -99,6 +99,7 @@ const UploadVideo = () => {
             value={videoData.videoUrl}
             className="w-full p-2.5 rounded border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500"
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -117,7 +118,6 @@ const UploadVideo = () => {
             value={videoData.videoThumbnail}
             className="w-full p-2.5 rounded border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500"
             onChange={handleChange}
-            required
           />
         </div>
 

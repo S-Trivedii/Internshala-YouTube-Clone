@@ -1,16 +1,30 @@
 import { Channel } from "../model/channel.model.js";
 import { Video } from "../model/video.model.js";
 
+// Get all videos
+export const getAllVideos = async (req, res) => {
+  try {
+    const videos = await Video.find()
+      .populate("uploader", "username")
+      .sort({ createdAt: -1 }); // Optional: newest first
+
+    if (videos.length === 0) {
+      return res
+        .status(200)
+        .json({ success: true, message: "No videos found", videos: [] });
+    }
+
+    return res.status(200).json({ success: true, videos });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 // Create video or post video
 export const createVideo = async (req, res) => {
   try {
-    const {
-      videoTitle,
-      videoDescription,
-      videoUrl,
-      channelId,
-      videoThumbnail,
-    } = req.body;
+    let { videoTitle, videoDescription, videoUrl, channelId, videoThumbnail } =
+      req.body;
 
     const userId = req.userId; // get userId from verfied token
 
@@ -18,6 +32,10 @@ export const createVideo = async (req, res) => {
       return res
         .status(400)
         .json({ message: "Missing required fields", success: false });
+    }
+
+    if (videoThumbnail === "") {
+      videoThumbnail = "http://localhost:3000/public/nature.jpg";
     }
 
     // Find the channel and check if the video uploader owns it (channel)

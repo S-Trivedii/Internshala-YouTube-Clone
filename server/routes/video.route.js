@@ -4,9 +4,13 @@ import {
   createVideo,
   reactVideo,
   deleteVideo,
+  getAllVideos,
 } from "../controllers/video.controller.js";
 
 const router = express.Router();
+
+// Get all videos
+router.get("/", getAllVideos);
 
 // Posting video / creating video
 router.post("/", verifyUser, createVideo);
