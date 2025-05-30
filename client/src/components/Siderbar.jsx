@@ -24,6 +24,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 
+// Creating section like youtube
 const sections = [
   {
     title: "Main",

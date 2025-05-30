@@ -1,21 +1,20 @@
-import { useState } from "react";
+import { useSearch } from "../utils/context/SearchContext";
 
+// Categories - hardcoded
 const categories = [
   "All",
-  "Gaming",
-  "React",
-  "Tutorial",
-  "Python",
-  "Counter Strike",
-  "Music",
-  "Live",
-  "News",
-  "JavaScript",
-  "Podcasts",
+  "Counter",
+  "Strike",
+  "Flower",
+  "Valley",
+  "Play",
+  "Game",
 ];
 
+// Filtering based on category present in video title
 const FilterBar = () => {
-  const [activeFilter, setActiveFilter] = useState("All");
+  // Created search context just for searching
+  const { activeFilter, setActiveFilter } = useSearch();
 
   return (
     <div className="flex overflow-x-auto gap-3 px-4 py-2 bg-white sticky top-0 z-10">

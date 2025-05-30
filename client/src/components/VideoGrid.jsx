@@ -4,10 +4,12 @@ import { VIDEO_API_END_POINT } from "../utils/apiEndPoint";
 import { Link } from "react-router-dom";
 import { useSearch } from "../utils/context/SearchContext";
 
+// Either all videos or only filtered video
 const VideoGrid = () => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { searchQuery } = useSearch();
+
+  const { searchQuery, activeFilter } = useSearch();
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -26,21 +28,28 @@ const VideoGrid = () => {
     fetchVideos();
   }, []);
 
-  const filteredVideos = searchQuery
-    ? videos.filter((video) =>
-        video.videoTitle.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-    : videos;
+  // Two types of filtering - search and category
+  const filteredVideos = videos.filter((video) => {
+    const title = video.videoTitle?.toLowerCase() || "";
+    const searchMatch =
+      searchQuery === "" || title.includes(searchQuery.toLowerCase());
+    const categoryMatch =
+      activeFilter === "All" ||
+      title.split(" ").some((word) => word === activeFilter.toLowerCase());
+
+    return searchMatch && categoryMatch;
+  });
 
   return (
     <div className="p-4">
       {loading ? (
         <p className="text-center">Loading...</p>
       ) : filteredVideos.length === 0 ? (
-        <p className="text-center font-semibold">No videos found</p>
+        <p className="text-center font-semibold">No matching videos found</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-6">
           {filteredVideos.map((video) => (
+            //  To video page
             <Link
               to={`/videos/${video._id}`}
               state={{
