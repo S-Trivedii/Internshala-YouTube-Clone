@@ -4,7 +4,13 @@ import { Video } from "../model/video.model.js";
 // Create video or post video
 export const createVideo = async (req, res) => {
   try {
-    const { videoTitle, videoDescription, videoUrl, channelId } = req.body;
+    const {
+      videoTitle,
+      videoDescription,
+      videoUrl,
+      channelId,
+      videoThumbnail,
+    } = req.body;
 
     const userId = req.userId; // get userId from verfied token
 
@@ -38,6 +44,7 @@ export const createVideo = async (req, res) => {
       videoDescription,
       videoUrl,
       channelId,
+      videoThumbnail,
       uploader: userId,
     });
     const video = await newVideo.save();

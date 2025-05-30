@@ -9,6 +9,7 @@ const UploadVideo = () => {
     videoTitle: "",
     videoDescription: "",
     videoUrl: "",
+    videoThumbnail: "",
     channelId,
   });
 
@@ -96,6 +97,24 @@ const UploadVideo = () => {
             id="videoUrl"
             name="videoUrl"
             value={videoData.videoUrl}
+            className="w-full p-2.5 rounded border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500"
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* Video Thumbnail */}
+        <div className="mb-5">
+          <label
+            className="block text-sm font-medium mb-1 text-gray-700"
+            htmlFor="videoThumbnail"
+          >
+            Video Thumbnail
+          </label>
+          <input
+            type="url"
+            id="videoThumbnail"
+            name="videoThumbnail"
+            value={videoData.videoThumbnail}
             className="w-full p-2.5 rounded border border-gray-300 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-red-500"
             onChange={handleChange}
             required
