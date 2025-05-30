@@ -111,3 +111,23 @@ export const reactVideo = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// Delete video
+export const deleteVideo = async (req, res) => {
+  try {
+    const video = await Video.findById(req.params.videoId);
+
+    // Check if video or uploader is missing
+    if (!video || !video.uploader || video.uploader.toString() !== req.userId) {
+      return res.status(403).json({
+        message: "Not authorized to delete this video",
+        success: false,
+      });
+    }
+
+    await video.deleteOne();
+    return res.status(200).json({ message: "Video deleted successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
