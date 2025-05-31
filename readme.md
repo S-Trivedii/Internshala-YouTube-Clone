@@ -117,3 +117,5 @@ npm run dev
 
 ✅ You're all set!
 Visit http://localhost:5173 (or the port Vite shows) to view the app.
+
+🎥 Watch Demo Video: [Click here to watch](https://drive.google.com/file/d/1DT8IiJ_uIFntwdh4topqjVZ8eet87LIf/view?usp=sharing)
